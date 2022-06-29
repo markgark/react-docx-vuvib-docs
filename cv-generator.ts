@@ -81,20 +81,11 @@ export class DocumentCreator {
             }),
 
             this.createHeading("Identificación"),
-            ...identificacion
-              .map(identificacion => {
-                const arr: Paragraph[] = [];
-                arr.push(
-                  this.crearContenidoIdentificacion(
-                    identificacion.id,
-                    identificacion.fecha
-                  )
-                );
-              })
-              .reduce((prev, curr) => prev.concat(curr), []),
-
+            new Paragraph(" "), 
+            ...this.crearContenidoIdentificacion(identificacion),
+            new Paragraph(" "),
             this.createContactInfo(PHONE_NUMBER, PROFILE_URL, EMAIL),
-            
+            new Paragraph(" "),
             this.createHeading("Education"),
             ...educations
               .map(education => {
@@ -368,20 +359,14 @@ export class DocumentCreator {
   }
 
   // Contenido de la sección Identificación
-  public crearContenidoIdentificacion(
-    identificador: string,
-    fecha: string
-  ): Paragraph {
-     return new Paragraph({
-      children: [
-        new TextRun({
-          text: "identificador: " + identificador
+
+  public crearContenidoIdentificacion(identificacion: any[]): Paragraph[] {
+    return identificacion.map(
+      identificacion =>
+        new Paragraph({
+          text: "ID: " + identificacion.id
         }),
-        new TextRun({
-          text: "Fecha: " + fecha,
-        })
-      ]
-     });
+    );
   }
 
   public createContactInfo(
