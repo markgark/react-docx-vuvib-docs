@@ -295,6 +295,7 @@ export class DocumentCreator {
     });
   }
 
+
   public createContactInfo(
     phoneNumber: string,
     profileUrl: string,
