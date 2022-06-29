@@ -79,6 +79,8 @@ export class DocumentCreator {
                 }),
               ]
             }),
+
+            this.createHeading("Identificación"),
             this.createContactInfo(PHONE_NUMBER, PROFILE_URL, EMAIL),
             this.createHeading("Education"),
             ...educations
@@ -352,6 +354,8 @@ export class DocumentCreator {
     });
   }
 
+
+
   public createContactInfo(
     phoneNumber: string,
     profileUrl: string,
@@ -374,7 +378,7 @@ export class DocumentCreator {
   public createHeading(text: string): Paragraph {
     return new Paragraph({
       text: text,
-      heading: HeadingLevel.HEADING_1,
+      heading: HeadingLevel.HEADING_3,
       thematicBreak: true
     });
   }

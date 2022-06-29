@@ -131,7 +131,12 @@ export const solicitante = [
 ];
 
 export const autorizacion = [
-
+  {
+    id: "PIB-SENESCTYT-2022-099",
+    proyecto: "INVESTIGACIÓN DE DIVERSIDAD DE RANAS EN PELIGRO DE EXTNSIÓN CUENCA DEL CHACO",
+    vigencia: "24 meses",
+    patrocinador: "INABIO"
+  }
 ];
 
 export const responsables = [
