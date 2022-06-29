@@ -296,6 +296,40 @@ export class DocumentCreator {
   }
 
 
+  public createLTableHeader(): Table {
+    return new Table({
+      rows: [
+        new TableRow({
+            children: [
+                new TableCell({
+                    children: [
+                      new Paragraph("Identificador")
+                    ],
+                }),
+                new TableCell({
+                    children: [new Paragraph("Nombres y apellidos")
+                  ],
+                }),
+                new TableCell({
+                    children: [
+                      new Paragraph("Nacionalidad")
+                    ],
+                }),
+                new TableCell({
+                    children: [
+                      new Paragraph("Edad")
+                    ],
+                }),
+            ],
+        }),
+      ],
+      width: {
+        size: 100,
+        type: WidthType.PERCENTAGE,
+      },
+    });
+  }
+
   public createContactInfo(
     phoneNumber: string,
     profileUrl: string,
