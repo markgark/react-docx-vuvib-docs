@@ -142,6 +142,9 @@ export class DocumentCreator {
   }
 
 
+  // Colocar los logos en el cabecera de página del Documento: escudo y logo de senescyt 
+  // Dirección y logotipo de gobierno
+
   public createLogoHeaderSenescyt(): Table {
     return new Table({
       rows: [
@@ -207,6 +210,8 @@ export class DocumentCreator {
     });
   }
 
+  // Colocar los logos en el pie de página del Documento 
+  // Dirección y logotipo de gobierno
 
   public createLogoFooterSenescyt(): Table {
     return new Table({

@@ -114,3 +114,30 @@ export const achievements = [
     name: "Oracle Certified Expert",
   },
 ];
+
+export const responsables = [
+  {
+    id: "1950004109",
+    nombre: "MONTAÑO OCAMPO DANING FERNANDO",
+    nacionalidad: "Ecuatoriana",
+    transporta: "NO"
+  }
+  {
+    id: "C7CT8FGCH",
+    nombre: "KAI MÜLLER",
+    nacionalidad: "Alemana",
+    transporta: "NO"
+  }
+  {
+    id: "C7C134M44",
+    nombre: "DIETMAR QUANDT",
+    nacionalidad: "Alemana",
+    transporta: "NO"
+  }
+  {
+    id: "1756861496",
+    nombre: "PEÑUELA MORA MARIA CRISTINA",
+    nacionalidad: "Ecuatoriana",
+    transporta: "SI"
+  }
+];
