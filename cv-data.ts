@@ -115,6 +115,25 @@ export const achievements = [
   },
 ];
 
+
+export const identificacion = [
+   {
+     id: "MAE-CMARG-2020-0099",
+     fecha: Date,
+   }
+];
+
+export const solicitante = [
+ {
+   id: "C7CT8FGCH",
+   nombre: "KAI MÜLLER",
+ }
+];
+
+export const autorizacion = [
+
+];
+
 export const responsables = [
   {
     id: "1950004109",
