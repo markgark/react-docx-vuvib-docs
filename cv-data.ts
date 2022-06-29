@@ -115,11 +115,10 @@ export const achievements = [
   },
 ];
 
-
 export const identificacion = [
    {
      id: "MAE-CMARG-2020-0099",
-     fecha: Date,
+     fecha: "2022.02.18",
    }
 ];
 

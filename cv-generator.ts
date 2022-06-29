@@ -38,7 +38,7 @@ const gobiernodetodos = fetch(
 
 export class DocumentCreator {
   // tslint:disable-next-line: typedef
-  public create([experiences, educations, skills, achivements]): Document {
+  public create([identificacion, experiences, educations, skills, achivements]): Document {
     const document = new Document({
       sections: [
         {
@@ -81,7 +81,20 @@ export class DocumentCreator {
             }),
 
             this.createHeading("Identificación"),
+            ...identificacion
+              .map(identificacion => {
+                const arr: Paragraph[] = [];
+                arr.push(
+                  this.crearContenidoIdentificacion(
+                    identificacion.id,
+                    identificacion.fecha
+                  )
+                );
+              })
+              .reduce((prev, curr) => prev.concat(curr), []),
+
             this.createContactInfo(PHONE_NUMBER, PROFILE_URL, EMAIL),
+            
             this.createHeading("Education"),
             ...educations
               .map(education => {
@@ -354,7 +367,22 @@ export class DocumentCreator {
     });
   }
 
-
+  // Contenido de la sección Identificación
+  public crearContenidoIdentificacion(
+    identificador: string,
+    fecha: string
+  ): Paragraph {
+     return new Paragraph({
+      children: [
+        new TextRun({
+          text: "identificador: " + identificador
+        }),
+        new TextRun({
+          text: "Fecha: " + fecha,
+        })
+      ]
+     });
+  }
 
   public createContactInfo(
     phoneNumber: string,
