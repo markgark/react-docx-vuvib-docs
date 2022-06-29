@@ -12,12 +12,14 @@ import {
   TableRow,
   TableBorders,
   VerticalAlign,
+  AlignmentType,
   WidthType,
   BorderStyle,
   TabStopPosition,
   TabStopType,
   TextRun
 } from "docx";
+import { Alignment } from "docx/build/file/paragraph/formatting/alignment";
 const PHONE_NUMBER = "07534563401";
 const PROFILE_URL = "https://www.linkedin.com/in/dolan1";
 const EMAIL = "docx@docx.com";
@@ -56,8 +58,26 @@ export class DocumentCreator {
           },
           children: [
             new Paragraph({
-              text: "Dolan Miu",
-              heading: HeadingLevel.TITLE
+              alignment: AlignmentType.CENTER,
+              children:[
+                new TextRun({
+                  text: "AUTORIZACION DE MOVILIZACIÓN DE ESPECÍMENES DE ESPECIES DE LA DIVERSIDAD BIOLÓGICA",
+                  font: "Arial",
+                  size: 20,
+                }),
+              ]
+            }),
+            new Paragraph(" "),
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              children:[
+                new TextRun({
+                  text: "AUTORIZACION DE COLECTA",
+                  font: "Arial",
+                  color: "gray", 
+                  size: 18,
+                }),
+              ]
             }),
             this.createContactInfo(PHONE_NUMBER, PROFILE_URL, EMAIL),
             this.createHeading("Education"),
@@ -128,6 +148,8 @@ export class DocumentCreator {
               "Dr. Dean Mohamedally Director of Postgraduate Studies Department of Computer Science, University College London Malet Place, Bloomsbury, London WC1E d.mohamedally@ucl.ac.uk"
             ),
             new Paragraph("More references upon request"),
+            this.createTableHeader(),
+            new Paragraph(" "),
             new Paragraph({
               text:
                 "This CV was generated in real-time based on my Linked-In profile from my personal website www.dolan.bio.",
@@ -296,7 +318,7 @@ export class DocumentCreator {
   }
 
 
-  public createLTableHeader(): Table {
+  public createTableHeader(): Table {
     return new Table({
       rows: [
         new TableRow({
