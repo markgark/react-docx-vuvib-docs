@@ -80,6 +80,7 @@ export class DocumentCreator {
               ]
             }),
 
+            new Paragraph(" "), 
             this.createHeading("Identificación"),
             new Paragraph(" "), 
             ...this.etiquetarIdentificacionId(identificacion),
