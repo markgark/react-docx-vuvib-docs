@@ -98,14 +98,18 @@ export class DocumentCreator {
             new Paragraph(" "), 
             this.createHeading("Responsable de las muestras o especímenes a movilizar"),
             new Paragraph(" "),
+            new Paragraph(" "),
+            new Paragraph(" "),
+            new Paragraph(" "),
+            new Paragraph(" "),
+            new Paragraph(" "),
             this.createHeading("Material biológico de recolectar/movilizar"),
             new Paragraph(" "),
 
             ...recursos
               .map(especimen => {
                 const arr: Paragraph[] = [];
-                arr.push(
-                  this.createRecursoHeader(especimen.recurso.scientificname)
+                arr.push(this.createRecursoHeader(especimen.scientificname)
                 );
                 return arr;
               })
@@ -543,18 +547,18 @@ export class DocumentCreator {
     especimen: string,
     ): Paragraph {
       return new Paragraph({
-      //   tabStops: [
-      //   {
-      //     type: TabStopType.RIGHT,
-      //     position: TabStopPosition.MAX
-      //   }
-      //  ],
+        tabStops: [
+        {
+          type: TabStopType.RIGHT,
+          position: TabStopPosition.MAX
+        }
+       ],
        children: [
           new TextRun({
               text: especimen,
               bold: true,
               font: "Arial",
-              size: 16,
+              size: 18,
           }),
        ]
      });

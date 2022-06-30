@@ -166,8 +166,6 @@ export const responsables = [
 ];
 
 export const recursos = [
-  {
-  recurso: [
       {
 		   scientificname: "Boa constrictor",
        muestra: [
@@ -201,7 +199,5 @@ export const recursos = [
          cantidadSolicitada: 20, 
        }
       ]
-    }
-   ]    
- }    
+    } 
 ];
