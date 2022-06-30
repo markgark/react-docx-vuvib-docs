@@ -38,7 +38,7 @@ const gobiernodetodos = fetch(
 
 export class DocumentCreator {
   // tslint:disable-next-line: typedef
-  public create([identificacion, solicitante, autorizacion, experiences, educations, skills, achivements]): Document {
+  public create([identificacion, solicitante, autorizacion, recursos, experiences, educations, skills, achivements]): Document {
     const document = new Document({
       sections: [
         {
@@ -98,6 +98,19 @@ export class DocumentCreator {
             new Paragraph(" "), 
             this.createHeading("Responsable de las muestras o especímenes a movilizar"),
             new Paragraph(" "),
+            this.createHeading("Material biológico de recolectar/movilizar"),
+            new Paragraph(" "),
+
+            ...recursos
+              .map(especimen => {
+                const arr: Paragraph[] = [];
+                arr.push(
+                  this.createRecursoHeader(especimen.recurso.scientificname)
+                );
+                return arr;
+              })
+              .reduce((prev, curr) => prev.concat(curr), []),
+
             
             // this.createContactInfo(PHONE_NUMBER, PROFILE_URL, EMAIL),
             // new Paragraph(" "),
@@ -524,6 +537,29 @@ export class DocumentCreator {
            }),
       )  
   }
+
+
+  public createRecursoHeader(
+    especimen: string,
+    ): Paragraph {
+      return new Paragraph({
+      //   tabStops: [
+      //   {
+      //     type: TabStopType.RIGHT,
+      //     position: TabStopPosition.MAX
+      //   }
+      //  ],
+       children: [
+          new TextRun({
+              text: especimen,
+              bold: true,
+              font: "Arial",
+              size: 16,
+          }),
+       ]
+     });
+  }
+
   public createContactInfo(
     phoneNumber: string,
     profileUrl: string,
