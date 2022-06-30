@@ -82,7 +82,8 @@ export class DocumentCreator {
 
             this.createHeading("Identificación"),
             new Paragraph(" "), 
-            ...this.crearContenidoIdentificacion(identificacion),
+            ...this.crearContenidoIdentificacion(identificacion,1),
+            ...this.crearContenidoIdentificacion(identificacion,2),
             new Paragraph(" "),
             this.createContactInfo(PHONE_NUMBER, PROFILE_URL, EMAIL),
             new Paragraph(" "),
@@ -360,13 +361,17 @@ export class DocumentCreator {
 
   // Contenido de la sección Identificación
 
-  public crearContenidoIdentificacion(identificacion: any[]): Paragraph[] {
-    return identificacion.map(
-      identificacion =>
-        new Paragraph({
-          text: "ID: " + identificacion.id
-        }),
-    );
+  public crearContenidoIdentificacion(identificacion, valor: number): Paragraph {
+    if (valor = 1) {
+       return identificacion.map(
+          identificacion => new Paragraph({text: "ID: " + identificacion.id}),
+       );
+    }
+    else {
+      return identificacion.map(
+         identificacion => new Paragraph({text: "Fecha: " + identificacion.fecha}),
+      );
+    }
   }
 
   public createContactInfo(
