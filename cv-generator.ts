@@ -38,7 +38,7 @@ const gobiernodetodos = fetch(
 
 export class DocumentCreator {
   // tslint:disable-next-line: typedef
-  public create([identificacion, solicitante, experiences, educations, skills, achivements]): Document {
+  public create([identificacion, solicitante, autorizacion, experiences, educations, skills, achivements]): Document {
     const document = new Document({
       sections: [
         {
@@ -89,83 +89,90 @@ export class DocumentCreator {
             new Paragraph(" "), 
             ...this.etiquetarSolicitante(solicitante),
             new Paragraph(" "), 
-            this.createContactInfo(PHONE_NUMBER, PROFILE_URL, EMAIL),
+            this.createHeading("Autorización"),
             new Paragraph(" "),
-            this.createHeading("Education"),
-            ...educations
-              .map(education => {
-                const arr: Paragraph[] = [];
-                arr.push(
-                  this.createInstitutionHeader(
-                    education.schoolName,
-                    `${education.startDate.year} - ${education.endDate.year}`
-                  )
-                );
-                arr.push(
-                  this.createRoleText(
-                    `${education.fieldOfStudy} - ${education.degree}`
-                  )
-                );
+            ...this.etiquetarAutorizacion(autorizacion),
+            new Paragraph(" "), 
+            this.createHeading("Responsable de las muestras o especímenes a movilizar"),
+            new Paragraph(" "),
+            
+            // this.createContactInfo(PHONE_NUMBER, PROFILE_URL, EMAIL),
+            // new Paragraph(" "),
+            // this.createHeading("Education"),
+            // ...educations
+            //   .map(education => {
+            //     const arr: Paragraph[] = [];
+            //     arr.push(
+            //       this.createInstitutionHeader(
+            //         education.schoolName,
+            //         `${education.startDate.year} - ${education.endDate.year}`
+            //       )
+            //     );
+            //     arr.push(
+            //       this.createRoleText(
+            //         `${education.fieldOfStudy} - ${education.degree}`
+            //       )
+            //     );
 
-                const bulletPoints = this.splitParagraphIntoBullets(
-                  education.notes
-                );
-                bulletPoints.forEach(bulletPoint => {
-                  arr.push(this.createBullet(bulletPoint));
-                });
+            //     const bulletPoints = this.splitParagraphIntoBullets(
+            //       education.notes
+            //     );
+            //     bulletPoints.forEach(bulletPoint => {
+            //       arr.push(this.createBullet(bulletPoint));
+            //     });
 
-                return arr;
-              })
-              .reduce((prev, curr) => prev.concat(curr), []),
-            this.createHeading("Experience"),
-            ...experiences
-              .map(position => {
-                const arr: Paragraph[] = [];
+            //     return arr;
+            //   })
+            //   .reduce((prev, curr) => prev.concat(curr), []),
+            // this.createHeading("Experience"),
+            // ...experiences
+            //   .map(position => {
+            //     const arr: Paragraph[] = [];
 
-                arr.push(
-                  this.createInstitutionHeader(
-                    position.company.name,
-                    this.createPositionDateText(
-                      position.startDate,
-                      position.endDate,
-                      position.isCurrent
-                    )
-                  )
-                );
-                arr.push(this.createRoleText(position.title));
+            //     arr.push(
+            //       this.createInstitutionHeader(
+            //         position.company.name,
+            //         this.createPositionDateText(
+            //           position.startDate,
+            //           position.endDate,
+            //           position.isCurrent
+            //         )
+            //       )
+            //     );
+            //     arr.push(this.createRoleText(position.title));
 
-                const bulletPoints = this.splitParagraphIntoBullets(
-                  position.summary
-                );
+            //     const bulletPoints = this.splitParagraphIntoBullets(
+            //       position.summary
+            //     );
 
-                bulletPoints.forEach(bulletPoint => {
-                  arr.push(this.createBullet(bulletPoint));
-                });
+            //     bulletPoints.forEach(bulletPoint => {
+            //       arr.push(this.createBullet(bulletPoint));
+            //     });
 
-                return arr;
-              })
-              .reduce((prev, curr) => prev.concat(curr), []),
-            this.createHeading("Skills, Achievements and Interests"),
-            this.createSubHeading("Skills"),
-            this.createSkillList(skills),
-            this.createSubHeading("Achievements"),
-            ...this.createAchivementsList(achivements),
-            this.createSubHeading("Interests"),
-            this.createInterests(
-              "Programming, Technology, Music Production, Web Design, 3D Modelling, Dancing."
-            ),
-            this.createHeading("References"),
-            new Paragraph(
-              "Dr. Dean Mohamedally Director of Postgraduate Studies Department of Computer Science, University College London Malet Place, Bloomsbury, London WC1E d.mohamedally@ucl.ac.uk"
-            ),
-            new Paragraph("More references upon request"),
+            //     return arr;
+            //   })
+            //   .reduce((prev, curr) => prev.concat(curr), []),
+            // this.createHeading("Skills, Achievements and Interests"),
+            // this.createSubHeading("Skills"),
+            // this.createSkillList(skills),
+            // this.createSubHeading("Achievements"),
+            // ...this.createAchivementsList(achivements),
+            // this.createSubHeading("Interests"),
+            // this.createInterests(
+            //   "Programming, Technology, Music Production, Web Design, 3D Modelling, Dancing."
+            // ),
+            // this.createHeading("References"),
+            // new Paragraph(
+            //   "Dr. Dean Mohamedally Director of Postgraduate Studies Department of Computer Science, University College London Malet Place, Bloomsbury, London WC1E d.mohamedally@ucl.ac.uk"
+            // ),
+            // new Paragraph("More references upon request"),
             this.createTableHeader(),
             new Paragraph(" "),
-            new Paragraph({
-              text:
-                "This CV was generated in real-time based on my Linked-In profile from my personal website www.dolan.bio.",
-              alignment: AlignmentType.CENTER
-            })
+            // new Paragraph({
+            //   text:
+            //     "This CV was generated in real-time based on my Linked-In profile from my personal website www.dolan.bio.",
+            //   alignment: AlignmentType.CENTER
+            // })
           ]
         }
       ]
@@ -425,6 +432,95 @@ export class DocumentCreator {
       )  
   }
 
+
+  public etiquetarAutorizacion(autorizacion): Table {
+    return autorizacion.map(
+           autorizacion => new Table ({
+              rows: [
+                new TableRow({ 
+                  children: [
+                    new TableCell({
+                        children: [
+                            new Paragraph({text: "Identificador: " + "\t" })
+                         ],
+                     }),
+                     new TableCell({
+                      children: [
+                          new Paragraph({text: autorizacion.id})
+                       ],
+                     }),
+                  ],
+                }),
+                new TableRow({ 
+                  children: [
+                    new TableCell({
+                        children: [
+                            new Paragraph({text: "Proyecto: " + "\t" })
+                         ],
+                     }),
+                     new TableCell({
+                        children: [
+                          new Paragraph({text: autorizacion.proyecto})
+                        ],
+                     }),
+                  ],
+                }),
+                new TableRow({ 
+                  children: [
+                    new TableCell({
+                        children: [
+                            new Paragraph({text: "Vigencia: " + "\t" })
+                         ],
+                     }),
+                     new TableCell({
+                      children: [
+                          new Paragraph({text: autorizacion.vigencia})
+                       ],
+                     }),                     
+                  ],
+                }),
+                new TableRow({ 
+                  children: [
+                    new TableCell({
+                        children: [
+                            new Paragraph({text: "Patrocinador: "+ "\t" })
+                         ],
+                     }),
+                    new TableCell({
+                      children: [
+                          new Paragraph({text: autorizacion.patrocinador})
+                       ],
+                   }),                     
+                  ],
+                })
+              ],
+              width: {
+                size: 100,
+                type: WidthType.PERCENTAGE,
+              },
+              borders: {
+                top: {
+                  style: BorderStyle.NONE,
+                },
+                bottom: {
+                  style: BorderStyle.NONE,
+                },
+                left: {
+                  style: BorderStyle.NONE,
+                },
+                right: {
+                  style: BorderStyle.NONE,
+                },
+                insideHorizontal: {
+                  style: BorderStyle.NONE,
+                },
+                insideVertical: {
+                  style: BorderStyle.NONE,
+                }
+              },
+           }),
+      )  
+  }
   public createContactInfo(
     phoneNumber: string,
     profileUrl: string,
