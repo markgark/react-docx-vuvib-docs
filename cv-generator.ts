@@ -501,7 +501,7 @@ export class DocumentCreator {
                   children: [
                     new TableCell({
                         children: [
-                            new Paragraph({text: "Identificador: " + "\t" })
+                            new Paragraph({text: "Identificador: " })
                          ],
                      }),
                      new TableCell({
@@ -515,7 +515,7 @@ export class DocumentCreator {
                   children: [
                     new TableCell({
                         children: [
-                            new Paragraph({text: "Proyecto: " + "\t" })
+                            new Paragraph({text: "Proyecto: " })
                          ],
                      }),
                      new TableCell({
@@ -529,7 +529,7 @@ export class DocumentCreator {
                   children: [
                     new TableCell({
                         children: [
-                            new Paragraph({text: "Vigencia: " + "\t" })
+                            new Paragraph({text: "Vigencia: " })
                          ],
                      }),
                      new TableCell({
@@ -543,7 +543,7 @@ export class DocumentCreator {
                   children: [
                     new TableCell({
                         children: [
-                            new Paragraph({text: "Patrocinador: "+ "\t" })
+                            new Paragraph({text: "Patrocinador: " })
                          ],
                      }),
                     new TableCell({
