@@ -46,7 +46,7 @@ class App extends Component<AppProps, AppState> {
         <Hello name={this.state.name} />
         <p>
           Start editing to see some magic happen :)
-          <button onClick={this.generate}>Generate CV with docx!</button>
+          <button onClick={this.generate}>Generar documento!</button>
         </p>
       </div>
     );

@@ -164,3 +164,44 @@ export const responsables = [
     transporta: "SI",
   },
 ];
+
+export const recursos = [
+  {
+  recurso: [
+      {
+		   scientificname: "Boa constrictor",
+       muestra: [
+        {
+          tipo: "MUESTRA",
+          submuestra: "SANGRE", 
+          descripcion: "orh+",
+          cantidadSolicitada: 10, 
+        },
+        {
+          tipo: "MUESTRA",
+          submuestra: "ANCAS", 
+          descripcion: "Dos ancas",
+          cantidadSolicitada: 20, 
+        }
+       ]
+     },
+     {
+      scientificname: "Cleistes tamboana",
+      muestra: [
+       {
+         tipo: "MUESTRA",
+         submuestra: "RAIZ", 
+         descripcion: "Raices",
+         cantidadSolicitada: 50, 
+       },
+       {
+         tipo: "MUESTRA",
+         submuestra: "HOJAS", 
+         descripcion: "Hojas",
+         cantidadSolicitada: 20, 
+       }
+      ]
+    }
+   ]    
+ }    
+];
