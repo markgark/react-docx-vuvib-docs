@@ -5,7 +5,7 @@ import "./style.css";
 
 import { saveAs } from "file-saver";
 import { Packer } from "docx";
-import { identificacion, experiences, education, skills, achievements } from "./cv-data";
+import { identificacion, solicitante, experiences, education, skills, achievements } from "./cv-data";
 import { DocumentCreator } from "./cv-generator";
 
 interface AppProps {}
@@ -25,6 +25,7 @@ class App extends Component<AppProps, AppState> {
     const documentCreator = new DocumentCreator();
     const doc = documentCreator.create([
       identificacion,
+      solicitante,
       experiences,
       education,
       skills,

@@ -38,7 +38,7 @@ const gobiernodetodos = fetch(
 
 export class DocumentCreator {
   // tslint:disable-next-line: typedef
-  public create([identificacion, experiences, educations, skills, achivements]): Document {
+  public create([identificacion, solicitante, experiences, educations, skills, achivements]): Document {
     const document = new Document({
       sections: [
         {
@@ -82,9 +82,12 @@ export class DocumentCreator {
 
             this.createHeading("Identificación"),
             new Paragraph(" "), 
-            ...this.crearContenidoIdentificacion(identificacion,1),
-            ...this.crearContenidoIdentificacion(identificacion,2),
+            ...this.etiquetarIdentificacionId(identificacion),
+            ...this.etiquetarIdentificacionFecha(identificacion),
             new Paragraph(" "),
+            this.createHeading("Solicitante"),
+            new Paragraph(" "), 
+            ...this.etiquetarSolicitante(solicitante),
             this.createContactInfo(PHONE_NUMBER, PROFILE_URL, EMAIL),
             new Paragraph(" "),
             this.createHeading("Education"),
@@ -361,17 +364,43 @@ export class DocumentCreator {
 
   // Contenido de la sección Identificación
 
-  public crearContenidoIdentificacion(identificacion, valor: number): Paragraph {
-    if (valor = 1) {
-       return identificacion.map(
-          identificacion => new Paragraph({text: "ID: " + identificacion.id}),
-       );
-    }
-    else {
-      return identificacion.map(
-         identificacion => new Paragraph({text: "Fecha: " + identificacion.fecha}),
-      );
-    }
+  public etiquetarIdentificacionId(identificacion): Paragraph {
+    return identificacion.map(
+           identificacion => new Paragraph({text: "ID:    " + "\t" + identificacion.id}),
+    );
+  }
+
+  public etiquetarIdentificacionFecha(identificacion): Paragraph {
+    return identificacion.map(
+           identificacion => new Paragraph({text: "Fecha: " + "\t" + identificacion.fecha}),
+    );
+  }
+
+  public etiquetarSolicitante(solicitante): Table {
+    return solicitante.map(
+           solicitantes => new Table ({
+              rows: [
+                new TableRow({ 
+                  children: [
+                    new TableCell({
+                        children: [
+                            new Paragraph({text: "id: " + "\t" + solicitante.id})
+                         ],
+                     }),
+                  ],
+                }),
+                new TableRow({ 
+                  children: [
+                    new TableCell({
+                        children: [
+                            new Paragraph({text: "Nombre: " + "\t" + solicitante.nombre})
+                         ],
+                     }),
+                  ],
+                })
+              ]
+           })
+      )  
   }
 
   public createContactInfo(
