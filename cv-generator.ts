@@ -367,7 +367,7 @@ export class DocumentCreator {
 
   public etiquetarIdentificacionId(identificacion): Paragraph {
     return identificacion.map(
-           identificacion => new Paragraph({text: "ID:    " + "\t" + identificacion.id}),
+           identificacion => new Paragraph({text: "Id:    " + "\t" + identificacion.id}),
     );
   }
 
@@ -394,7 +394,7 @@ export class DocumentCreator {
                   children: [
                     new TableCell({
                         children: [
-                            new Paragraph({text: "Nombre:           " + "\t" + solicitante.nombre})
+                            new Paragraph({text: "Nombre:           " + "\t" + "\t" + solicitante.nombre})
                          ],
                      }),
                   ],
