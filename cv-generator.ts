@@ -101,6 +101,8 @@ export class DocumentCreator {
             new Paragraph(" "),
             new Paragraph(" "),
             new Paragraph(" "),
+            this.createTableHeader(),
+            new Paragraph(" "),
             new Paragraph(" "),
             new Paragraph(" "),
             this.createHeading("Material biológico de recolectar/movilizar"),
@@ -110,10 +112,11 @@ export class DocumentCreator {
               .map(especimen => {
                 const arr: Paragraph[] = [];
                 arr.push(this.createRecursoHeader(especimen.scientificname));
+                arr.push(this.createTableHeaderRecursos());
+                arr.push(this.parrrafoBlanco());
                 return arr;
               })
               .reduce((prev, curr) => prev.concat(curr), []),
-
             
             // this.createContactInfo(PHONE_NUMBER, PROFILE_URL, EMAIL),
             // new Paragraph(" "),
@@ -185,8 +188,6 @@ export class DocumentCreator {
             //   "Dr. Dean Mohamedally Director of Postgraduate Studies Department of Computer Science, University College London Malet Place, Bloomsbury, London WC1E d.mohamedally@ucl.ac.uk"
             // ),
             // new Paragraph("More references upon request"),
-            this.createTableHeader(),
-            new Paragraph(" "),
             // new Paragraph({
             //   text:
             //     "This CV was generated in real-time based on my Linked-In profile from my personal website www.dolan.bio.",
@@ -322,7 +323,6 @@ export class DocumentCreator {
                       },
                     }),
                   ],
-                  // alineación de la figura a la derecha
                 }),
               ],
               verticalAlign: VerticalAlign.CENTER,
@@ -376,7 +376,48 @@ export class DocumentCreator {
                 }),
                 new TableCell({
                     children: [
-                      new Paragraph("Edad")
+                      new Paragraph("Transporta")
+                    ],
+                }),
+            ],
+        }),
+      ],
+      width: {
+        size: 100,
+        type: WidthType.PERCENTAGE,
+      },
+    });
+  }
+
+  public createTableHeaderRecursos(): Table {
+    return new Table({
+      rows: [
+        new TableRow({
+            children: [
+                new TableCell({
+                    children: [
+                      new Paragraph("Tipo")
+                    ],
+                }),
+                new TableCell({
+                    children: [new Paragraph("Muestra/Lote")
+                  ],
+                }),
+                new TableCell({
+                    children: [
+                      new Paragraph("Descripción")
+                    ],
+                }),
+                new TableCell({
+                    children: [
+                        new Paragraph({
+                          alignment: AlignmentType.END,
+                          children: [
+                            new TextRun({
+                              text: "Cantidad",
+                            }),
+                          ],
+                      }),    
                     ],
                 }),
             ],
@@ -557,6 +598,7 @@ export class DocumentCreator {
               text: especimen,
               font: "Arial",
               size: 20,
+              color: "gray",
           }),
        ]
      });
@@ -582,6 +624,16 @@ export class DocumentCreator {
           }),
        ]
      });
+  }
+
+  public  parrrafoBlanco(): Paragraph {
+   return new Paragraph({
+     children: [
+      new TextRun({
+          text: " " 
+      }),
+     ]
+   });
   }
 
   public createContactInfo(
