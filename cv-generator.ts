@@ -38,7 +38,7 @@ const gobiernodetodos = fetch(
 
 export class DocumentCreator {
   // tslint:disable-next-line: typedef
-  public create([identificacion, solicitante, autorizacion, recursos, experiences, educations, skills, achivements]): Document {
+  public create([identificacion, solicitante, autorizacion, recursos, muestras, experiences, educations, skills, achivements]): Document {
     const document = new Document({
       sections: [
         {
@@ -109,8 +109,7 @@ export class DocumentCreator {
             ...recursos
               .map(especimen => {
                 const arr: Paragraph[] = [];
-                arr.push(this.createRecursoHeader(especimen.scientificname)
-                );
+                arr.push(this.createRecursoHeader(especimen.scientificname));
                 return arr;
               })
               .reduce((prev, curr) => prev.concat(curr), []),
@@ -556,8 +555,29 @@ export class DocumentCreator {
        children: [
           new TextRun({
               text: especimen,
-              bold: true,
               font: "Arial",
+              size: 20,
+          }),
+       ]
+     });
+  }
+
+  public createTableMuestra(
+    submuestra: string,
+    ): Paragraph {
+      return new Paragraph({
+        tabStops: [
+        {
+          type: TabStopType.RIGHT,
+          position: TabStopPosition.MAX
+        }
+       ],
+       children: [
+          new TextRun({
+              text: "....... " + submuestra,
+              bold: true,
+              italics: true,
+              font: "Calibri",
               size: 18,
           }),
        ]

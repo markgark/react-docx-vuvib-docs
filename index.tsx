@@ -5,7 +5,7 @@ import "./style.css";
 
 import { saveAs } from "file-saver";
 import { Packer } from "docx";
-import { identificacion, solicitante, autorizacion, recursos, experiences, education, skills, achievements } from "./cv-data";
+import { identificacion, solicitante, autorizacion, recursos, muestras, experiences, education, skills, achievements } from "./cv-data";
 import { DocumentCreator } from "./cv-generator";
 
 interface AppProps {}
@@ -28,6 +28,7 @@ class App extends Component<AppProps, AppState> {
       solicitante,
       autorizacion,
       recursos,
+      muestras, 
       experiences,
       education,
       skills,
