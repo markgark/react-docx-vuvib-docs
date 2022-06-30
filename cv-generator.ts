@@ -88,6 +88,7 @@ export class DocumentCreator {
             this.createHeading("Solicitante"),
             new Paragraph(" "), 
             ...this.etiquetarSolicitante(solicitante),
+            new Paragraph(" "), 
             this.createContactInfo(PHONE_NUMBER, PROFILE_URL, EMAIL),
             new Paragraph(" "),
             this.createHeading("Education"),
@@ -378,13 +379,13 @@ export class DocumentCreator {
 
   public etiquetarSolicitante(solicitante): Table {
     return solicitante.map(
-           solicitantes => new Table ({
+           solicitante => new Table ({
               rows: [
                 new TableRow({ 
                   children: [
                     new TableCell({
                         children: [
-                            new Paragraph({text: "id: " + "\t" + solicitante.id})
+                            new Paragraph({text: "Cédula/Pasaporte: " + "\t" + solicitante.id})
                          ],
                      }),
                   ],
@@ -393,13 +394,34 @@ export class DocumentCreator {
                   children: [
                     new TableCell({
                         children: [
-                            new Paragraph({text: "Nombre: " + "\t" + solicitante.nombre})
+                            new Paragraph({text: "Nombre:           " + "\t" + solicitante.nombre})
                          ],
                      }),
                   ],
                 })
-              ]
-           })
+              ],
+              width: {
+                size: 100,
+                type: WidthType.PERCENTAGE,
+              },
+              borders: {
+                top: {
+                  style: BorderStyle.NONE,
+                },
+                bottom: {
+                  style: BorderStyle.NONE,
+                },
+                left: {
+                  style: BorderStyle.NONE,
+                },
+                right: {
+                  style: BorderStyle.NONE,
+                },
+                insideHorizontal: {
+                  style: BorderStyle.NONE,
+                }
+              },
+           }),
       )  
   }
 
