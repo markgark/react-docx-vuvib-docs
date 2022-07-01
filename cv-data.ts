@@ -142,25 +142,25 @@ export const responsables = [
   {
     id: "1950004109",
     nombre: "MONTAÑO OCAMPO DANING FERNANDO",
-    nacionalidad: "Ecuatoriana",
+    pais: "Ecuador",
     transporta: "NO",
   },
   {
     id: "C7CT8FGCH",
     nombre: "KAI MÜLLER",
-    nacionalidad: "Alemana",
+    pais: "Alemania",
     transporta: "NO",
   },
   {
     id: "C7C134M44",
     nombre: "DIETMAR QUANDT",
-    nacionalidad: "Alemana",
+    pais: "Alemania",
     transporta: "NO",
   },
   {
     id: "1756861496",
     nombre: "PEÑUELA MORA MARIA CRISTINA",
-    nacionalidad: "Ecuatoriana",
+    pais: "Ecuador",
     transporta: "SI",
   },
 ];

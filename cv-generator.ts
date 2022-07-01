@@ -38,7 +38,7 @@ const gobiernodetodos = fetch(
 
 export class DocumentCreator {
   // tslint:disable-next-line: typedef
-  public create([identificacion, solicitante, autorizacion, recursos, muestras, experiences, educations, skills, achivements]): Document {
+  public create([identificacion, solicitante, autorizacion, responsables, recursos, muestras, experiences, educations, skills, achivements]): Document {
     const document = new Document({
       sections: [
         {
@@ -98,10 +98,14 @@ export class DocumentCreator {
             new Paragraph(" "), 
             this.createHeading("Responsable de las muestras o especímenes a movilizar"),
             new Paragraph(" "),
-            new Paragraph(" "),
-            new Paragraph(" "),
-            new Paragraph(" "),
-            this.createTableHeader(),
+            this.createTableHeaderReponsables(),
+            ...responsables
+              .map(responsable => {
+                const arr: Paragraph[] = [];
+                arr.push(this.createTableResponsable(responsable.id, responsable.nombre, responsable.pais, responsable.transporta));
+                return arr;
+              })
+              .reduce((prev, curr) => prev.concat(curr), []),
             new Paragraph(" "),
             new Paragraph(" "),
             new Paragraph(" "),
@@ -114,6 +118,13 @@ export class DocumentCreator {
                 arr.push(this.createRecursoHeader(especimen.scientificname));
                 arr.push(this.createTableHeaderRecursos());
                 arr.push(this.parrrafoBlanco());
+
+                            //     const bulletPoints = this.splitParagraphIntoBullets(
+            //       education.notes
+            //     );
+            //     bulletPoints.forEach(bulletPoint => {
+            //       arr.push(this.createBullet(bulletPoint));
+            //     });
                 return arr;
               })
               .reduce((prev, curr) => prev.concat(curr), []),
@@ -355,7 +366,7 @@ export class DocumentCreator {
   }
 
 
-  public createTableHeader(): Table {
+  public createTableHeaderReponsables(): Table {
     return new Table({
       rows: [
         new TableRow({
@@ -370,14 +381,28 @@ export class DocumentCreator {
                   ],
                 }),
                 new TableCell({
-                    children: [
-                      new Paragraph("Nacionalidad")
-                    ],
+                  children: [
+                    new Paragraph({
+                      children:[
+                        new TextRun({
+                        text: "Nacionalidad",
+                        }),
+                      ],
+                      alignment: AlignmentType.CENTER,
+                    })
+                  ],
                 }),
                 new TableCell({
-                    children: [
-                      new Paragraph("Transporta")
-                    ],
+                  children: [
+                    new Paragraph({
+                      children:[
+                        new TextRun({
+                        text: "Transporta",
+                        }),
+                      ],
+                      alignment: AlignmentType.CENTER,
+                    })
+                  ],
                 }),
             ],
         }),
@@ -388,6 +413,56 @@ export class DocumentCreator {
       },
     });
   }
+
+
+  public createTableResponsable(id: string, nombre: string, pais:string, transporta: string): Table {
+    return new Table ({
+        rows: [
+                new TableRow({ 
+                  children: [
+                     new TableCell({
+                      children: [
+                          new Paragraph({text: id})
+                       ],
+                     }),
+                     new TableCell({
+                        children: [
+                          new Paragraph({text: nombre})
+                        ],
+                     }),
+                     new TableCell({
+                      children: [
+                        new Paragraph({
+                          children:[
+                            new TextRun({
+                            text: pais,
+                            }),
+                          ],
+                          alignment: AlignmentType.CENTER,
+                        })
+                      ],
+                     }),                     
+                    new TableCell({
+                      children: [
+                        new Paragraph({
+                          children:[
+                            new TextRun({
+                            text: transporta,
+                            }),
+                          ],
+                          alignment: AlignmentType.CENTER,
+                        })
+                      ]
+                    }),
+                  ],  
+                }),                    
+        ],
+        width: {
+          size: 100,
+          type: WidthType.PERCENTAGE,
+        },
+      });
+    }
 
   public createTableHeaderRecursos(): Table {
     return new Table({
@@ -657,9 +732,14 @@ export class DocumentCreator {
 
   public createHeading(text: string): Paragraph {
     return new Paragraph({
-      text: text,
+      children: [
+        new TextRun({
+          text: text,
+          bold: true,
+        }),
+      ],
       heading: HeadingLevel.HEADING_3,
-      thematicBreak: true
+      //thematicBreak: true
     });
   }
 
