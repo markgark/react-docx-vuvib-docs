@@ -36,6 +36,10 @@ const gobiernodetodos = fetch(
     'https://cdn.jsdelivr.net/gh/markgark/react-ts-vuvib@main/imagenes/gobierno-de-todos.png'
 ).then((r) => r.blob());
 
+const contenidoPlantilla = fetch(
+  'https://cdn.jsdelivr.net/gh/markgark/react-ts-vuvib@main/plantillas/resolucion-pib.txt'
+).then(t => t.text());
+
 export class DocumentCreator {
   // tslint:disable-next-line: typedef
   public create([identificacion, solicitante, autorizacion, responsables, zonasUbicaciones,laboratoriosDestino, recursos, muestras, experiences, educations, skills, achivements]): Document {
@@ -370,6 +374,16 @@ export class DocumentCreator {
         }
       },
     });
+  }
+
+  public crearParrafo(parrafo: string): Paragraph {
+    return new Paragraph({
+      text: parrafo
+    });
+  }
+
+  public splitContenido(text: string): string[] {
+    return text.split("\n\n");
   }
 
   public createTableHeaderReponsables(): Table {
