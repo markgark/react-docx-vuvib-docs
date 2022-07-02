@@ -38,7 +38,7 @@ const gobiernodetodos = fetch(
 
 export class DocumentCreator {
   // tslint:disable-next-line: typedef
-  public create([identificacion, solicitante, autorizacion, responsables, zonasUbicacion, recursos, muestras, experiences, educations, skills, achivements]): Document {
+  public create([identificacion, solicitante, autorizacion, responsables, zonasUbicaciones,laboratoriosDestino, recursos, muestras, experiences, educations, skills, achivements]): Document {
     const document = new Document({
       sections: [
         {
@@ -109,9 +109,14 @@ export class DocumentCreator {
             new Paragraph(" "),
             this.createHeading("Ubicación | Origen"),
             new Paragraph(" "),
+            ...this.etiquetarProvincia(zonasUbicaciones),
+            ...this.etiquetarAreaProtegida(zonasUbicaciones),
+            new Paragraph(" "),
             this.createHeading("Ubicación | Destino"),
             new Paragraph(" "),
-            this.createHeading("Material biológico de recolectar/movilizar"),
+            ...this.etiquetarLaboratorioDestino(laboratoriosDestino),
+            new Paragraph(" "),
+            this.createHeading("Material biológico a recolectar/movilizar"),
             new Paragraph(" "),
 
             ...recursos
@@ -120,6 +125,7 @@ export class DocumentCreator {
                 arr.push(this.createRecursoHeader(especimen.scientificname));
                 arr.push(this.createTableHeaderRecursos());
                 arr.push(this.parrrafoBlanco());
+                console.log(especimen)
 
                             //     const bulletPoints = this.splitParagraphIntoBullets(
             //       education.notes
@@ -653,6 +659,32 @@ export class DocumentCreator {
               },
            }),
       )  
+  }
+
+  // Contenido de la sección Ubicaciones
+
+  public etiquetarProvincia(zonasUbicaciones): Paragraph {
+    return zonasUbicaciones.map(
+           identificacion => new Paragraph({text: "Provincia: " + "\t" + identificacion.nombreProvincia}),
+    );
+  }
+
+  public etiquetarAreaProtegida(zonasUbicaciones): Paragraph {
+    return zonasUbicaciones.map(
+           identificacion => new Paragraph({text: "Área Protegida: " + "\t" + identificacion.nombreAreaProtegida}),
+    );
+  }
+
+  public etiquetarBosqueProtectos(zonasUbicaciones): Paragraph {
+    return zonasUbicaciones.map(
+           identificacion => new Paragraph({text: "Bosque Protector: " + "\t" + identificacion.nombreBosqueProtector}),
+    );
+  }
+
+  public etiquetarLaboratorioDestino(laboratoriosDestino): Paragraph {
+    return laboratoriosDestino.map(
+           identificacion => new Paragraph({text: "Nombre: " + "\t" + identificacion.nombre}),
+    );
   }
 
   public createRecursoHeader(
