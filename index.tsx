@@ -8,6 +8,7 @@ import { Packer } from "docx";
 import { identificacion, solicitante, autorizacion,responsables,zonasUbicaciones, laboratoriosDestino, recursos, muestras, experiences, education, skills, achievements } from "./cv-data";
 import { DocumentCreator } from "./cv-generator";
 
+
 interface AppProps {}
 interface AppState {
   name: string;
