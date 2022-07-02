@@ -38,7 +38,7 @@ const gobiernodetodos = fetch(
 
 export class DocumentCreator {
   // tslint:disable-next-line: typedef
-  public create([identificacion, solicitante, autorizacion, responsables, recursos, muestras, experiences, educations, skills, achivements]): Document {
+  public create([identificacion, solicitante, autorizacion, responsables, zonasUbicacion, recursos, muestras, experiences, educations, skills, achivements]): Document {
     const document = new Document({
       sections: [
         {
@@ -96,7 +96,7 @@ export class DocumentCreator {
             new Paragraph(" "),
             ...this.etiquetarAutorizacion(autorizacion),
             new Paragraph(" "), 
-            this.createHeading("Responsable de las muestras o especímenes a movilizar"),
+            this.createHeading("Responsables de las muestras o especímenes a movilizar"),
             new Paragraph(" "),
             this.createTableHeaderReponsables(),
             ...responsables
@@ -107,7 +107,9 @@ export class DocumentCreator {
               })
               .reduce((prev, curr) => prev.concat(curr), []),
             new Paragraph(" "),
+            this.createHeading("Ubicación | Origen"),
             new Paragraph(" "),
+            this.createHeading("Ubicación | Destino"),
             new Paragraph(" "),
             this.createHeading("Material biológico de recolectar/movilizar"),
             new Paragraph(" "),
@@ -211,7 +213,6 @@ export class DocumentCreator {
 
     return document;
   }
-
 
   // Colocar los logos en el cabecera de página del Documento: escudo y logo de senescyt 
   // Dirección y logotipo de gobierno
@@ -365,7 +366,6 @@ export class DocumentCreator {
     });
   }
 
-
   public createTableHeaderReponsables(): Table {
     return new Table({
       rows: [
@@ -413,7 +413,6 @@ export class DocumentCreator {
       },
     });
   }
-
 
   public createTableResponsable(id: string, nombre: string, pais:string, transporta: string): Table {
     return new Table ({
@@ -567,7 +566,6 @@ export class DocumentCreator {
       )  
   }
 
-
   public etiquetarAutorizacion(autorizacion): Table {
     return autorizacion.map(
            autorizacion => new Table ({
@@ -656,7 +654,6 @@ export class DocumentCreator {
            }),
       )  
   }
-
 
   public createRecursoHeader(
     especimen: string,

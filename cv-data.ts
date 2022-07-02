@@ -168,13 +168,56 @@ export const responsables = [
 export const recursos = [
   {
     id: "1",
-		scientificname: "Boa constrictor",
+    scientificname: "Boa constrictor",
     },
   {
     id: "2",
     scientificname: "Cleistes tamboana",
   } 
 ];
+
+
+export const recursosMuestras = [
+  {
+    id: "1",
+    scientificname: "Boa constrictor",
+    childNodes: 
+    [
+      {
+        tipo: "MUESTRA",
+        submuestra: "SANGRE", 
+        descripcion: "orh+",
+        cantidadSolicitada: 1
+      },
+      {
+        tipo: "MUESTRA",
+        submuestra: "ANCAS", 
+        descripcion: "Dos ancas",
+        cantidadSolicitada: 20,         
+      }
+    ]
+    },
+  {
+    id: "2",
+    scientificname: "Cleistes tamboana",
+    childNodes: 
+    [
+      {
+        tipo: "MUESTRA",
+        submuestra: "RAIZ", 
+        descripcion: "Raices",
+        cantidadSolicitada: 50, 
+      },
+      {
+        tipo: "MUESTRA",
+        submuestra: "HOJAS", 
+        descripcion: "Hojas",
+        cantidadSolicitada: 20,        
+      }
+    ]
+  } 
+];
+
 
 export const muestras = [
       {
@@ -205,4 +248,24 @@ export const muestras = [
        descripcion: "Hojas",
        cantidadSolicitada: 20, 
      }
+];
+
+export const zonasUbicaciones = [
+  {
+    nombreProvincia: "LOJA",
+    nombreAreaProtegida: "AMARCOS PÉREZ DE CASTILLA, PODOCARPUS, YACURI",
+    nombreBosqueProtector: " "
+  }
+];
+
+export const laborartoriosOrigen = [
+  {
+    nombre: "Centro de servicios ambientales y químicos CESAQ PUCE, Pontificia Universidad Católica del Ecuador"
+  }
+];
+
+export const laboratoriosDestino = [ 
+  { 
+    nombre: "Laboratorio AMBIGEST gestión ambiental Cía Ltda."
+  }
 ];
