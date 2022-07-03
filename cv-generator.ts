@@ -36,9 +36,35 @@ const gobiernodetodos = fetch(
     'https://cdn.jsdelivr.net/gh/markgark/react-ts-vuvib@main/imagenes/gobierno-de-todos.png'
 ).then((r) => r.blob());
 
-const contenidoPlantilla = fetch(
-  'https://cdn.jsdelivr.net/gh/markgark/react-ts-vuvib@main/plantillas/resolucion-pib.txt'
-).then(t => t.text());
+// const contenidoPlantilla = fetch(
+//   'https://cdn.jsdelivr.net/gh/markgark/react-ts-vuvib@main/plantillas/resolucion-pib.txt'
+// ).then(t => t.text());
+
+const pathPlantilla = 'https://github.com/markgark/react-docx-vuvib-docs/blob/main/plantillas/resolucion-pib.txt';
+
+import archivoPlantilla from 'https://github.com/markgark/react-docx-vuvib-docs/blob/main/plantillas/resolucion-pib.txt';
+
+const contenidoPlantilla = fetch(archivoPlantilla).then(t => t.text());
+
+// var file = new FileReader();
+// file.readAsText(e.target.files[0]);
+
+// file.onload = (e) => {
+//   contenidoPlantilla = file.result;
+//   const strElContenido = elContenido.split("\n\n");
+// }
+
+// const exampleFile = async (e) => {
+//   e.preventDefault()
+//   const file = new FileReader()
+//   file.onload = async (e) => { 
+//     const text = (e.target.result)
+//     console.log(text)
+//     alert(text)
+//   };
+//   file.readAsText(e.target.files[0])
+// }
+
 
 export class DocumentCreator {
   // tslint:disable-next-line: typedef
